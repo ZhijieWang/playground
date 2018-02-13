@@ -22,13 +22,17 @@ func main() {
 	fmt.Println("Expected Output: Not Found")
 	fmt.Println("Actual Output: ", cache.get("2")) // returns -1 (not found)
 	cache.put("4", "4")                            // evicts key 1
-	//cache.get("1")      // returns -1 (not found)
-	//cache.get("3")      // returns 3
-	//cache.get("4")      // returns 4
+	fmt.Println("Expected Output: Not Found")
+	fmt.Println("Actual Output: ", cache.get("1")) // returns -1 (not           found)
+	fmt.Println("Expected Output: 3")
+	fmt.Println("Actual Output: ", cache.get("3")) // returns 3
+	fmt.Println("Expected Output: 4")
+	fmt.Println("Actual Output: ", cache.get("4")) // returns 4
 }
 
 // Element type is container for linked list implementation
 type Element struct {
+	Key    string
 	Value  string
 	before *Element
 	after  *Element
@@ -95,9 +99,10 @@ func (l *LRU) put(key string, value string) {
 	}
 
 	if l.storage.Len == l.maxDepth {
+		delete(l.keys, l.storage.Tail.Key)
 		l.storage.Remove(l.storage.Tail)
 	}
-	l.storage.PushFront(&Element{value, nil, nil})
+	l.storage.PushFront(&Element{key, value, nil, nil})
 	l.keys[key] = l.storage.Head
 }
 
