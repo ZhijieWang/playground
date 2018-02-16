@@ -29,24 +29,41 @@
 
 #include <stdio.h>
 int main() {
-    int num_cases = readf();
-    int case_iterator - 0;
+    FILE *file;
+    file = fopen("input.txt", "r");
+    if (!file){
+        return -1;
+    }
+
+    FILE *output;
+    output = fopen("output.txt", "w"); 
+    int num_cases;
+    fscanf(file, "%d", &num_cases);
+    printf("Number of test cases %d \n", num_cases);
+    int case_iterator = 0;
     int num_elements;
+
     for (case_iterator; case_iterator<num_cases; case_iterator ++){
-        num_elements = readf();
-        readline();
-        int component = read()
+        fscanf(file, "%d", &num_elements);
+        printf("%d elements in case %d \n", num_elements, case_iterator);
+        int component;
+        fscanf(file, "%d", &component);
+        printf("%d", component);
         int sum = component;
         int element_iterator = 1;
         int hold;
         for (element_iterator; element_iterator<num_elements; element_iterator++){
-             hold = read()
+            fscanf(file, "%d", &hold);
+            printf("%d", hold);
              if (hold +component > sum) {
-                 sum = component + hold
-                 component =hold
+                 sum = component + hold;
+                 component =hold;
              }
         }
-        printf(sum)
+        printf("\n");
+        fprintf(output, "%d\n", sum);
     }
+    fclose(file);
+    fclose(output);
 	return 0;
 }
