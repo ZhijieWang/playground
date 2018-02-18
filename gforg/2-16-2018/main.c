@@ -25,8 +25,60 @@
 //Test Case 1 : The elements  of array form a contiguous set of integers which is {2, 3, 4, 5, 6} so the output is Yes.
 //Test Case 2: We are unable to form contiguous set of integers using elements of array.
 #include <stdio.h>
-
+struct range {
+    int left;
+    int right;
+};
+ range* combine(range* r1, range* r2){
+    if (r1->left ==r2->right){
+        
+    }
+    return r1;
+}
+int grow(range* r, int num){
+    if (r->left==NULL){
+        r->left = num;
+        return 1;
+    }else if (r->right ==NULL){
+            if (num == r->left -1){
+             
+                r->right = r->left;
+                r->left = num;
+                return 1;
+             } 
+             else if (num == r->left+1){
+                 r->right = num;
+                return 1;
+            }
+            else {
+                return 0
+            }
+        }
+    else if (num == r->left-1){
+        r->left = num;
+        return 1;
+    }
+    else if (num == r->right +1){
+        r->right =num;
+        return 1;
+    }else if((num >= r->left) & (num <= r->right)){
+        return 1;
+    }else  {
+        return 0;
+    }
+}
 int main() {
     
+    FILE * input;
+    input = fopen("input.txt", "r");
+    FILE * output;
+    output = fopen("output.txt", "w");
+    int num_cases;
+    fscanf(input, "%d", &num_cases);
+    for(; num_cases>0; num_cases--){
+        int num_elements;
+        fscanf(input, "%d", &num_elements);
+    }
+
 	return 0;
 }
