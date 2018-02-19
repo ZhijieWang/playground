@@ -25,44 +25,10 @@
 //Test Case 1 : The elements  of array form a contiguous set of integers which is {2, 3, 4, 5, 6} so the output is Yes.
 //Test Case 2: We are unable to form contiguous set of integers using elements of array.
 #include <stdio.h>
-struct set{
-
-}
-int grow(range* r, int num){
-    if (r->left==NULL){
-        r->left = num;
-        return 1;
-    }else if (r->right ==NULL){
-            if (num == r->left -1){
-             
-                r->right = r->left;
-                r->left = num;
-                return 1;
-             } 
-             else if (num == r->left+1){
-                 r->right = num;
-                return 1;
-            }
-            else {
-                return 0
-            }
-        }
-    else if (num == r->left-1){
-        r->left = num;
-        return 1;
-    }
-    else if (num == r->right +1){
-        r->right =num;
-        return 1;
-    }else if((num >= r->left) & (num <= r->right)){
-        return 1;
-    }else  {
-        return 0;
-    }
-}
 int main() {
     
     FILE * input;
+
     input = fopen("input.txt", "r");
     FILE * output;
     output = fopen("output.txt", "w");
@@ -71,7 +37,50 @@ int main() {
     for(; num_cases>0; num_cases--){
         int num_elements;
         fscanf(input, "%d", &num_elements);
-    }
+        int holder[num_elements];
+        int i, min, max;
+        fscanf(input, "%d", &holder[0]);
+        min = holder[0];
+        max = holder[0];
+        
+        for (i = 1; i < num_elements;i++){
+            fscanf(input, "%d", &holder[i]);
+            if (holder[i]> max){
+                max=holder[i];
+            }
+            if (holder[i]< min){
+                min = holder[i];
+            }
+        }
+        int length = max - min+1;
+        if (length > num_elements){
+            printf("Elements too short");
+            fprintf(output,"No\n");
+        }
+        else{
+            int checker_array[length];
+            while(num_elements > 0){
+                num_elements--;
+                printf("%d",holder[num_elements]);
+                checker_array[holder[num_elements]-min]=1;
+            }
+            printf("\n");
+            int checked = 1;
+            while (length > 0){
+                length --;
+                checked &= checker_array[length];
+                printf("%d",checker_array[length]);
+            }
+            printf("\n");
+            if (checked){
+                fprintf(output, "Yes\n");
+            }else{
+                fprintf(output, "No\n");
+            }
+        }
 
+    }
+    fclose(input);
+    fclose(output);
 	return 0;
 }
