@@ -25,15 +25,8 @@
 //Test Case 1 : The elements  of array form a contiguous set of integers which is {2, 3, 4, 5, 6} so the output is Yes.
 //Test Case 2: We are unable to form contiguous set of integers using elements of array.
 #include <stdio.h>
-struct range {
-    int left;
-    int right;
-};
- range* combine(range* r1, range* r2){
-    if (r1->left ==r2->right){
-        
-    }
-    return r1;
+struct set{
+
 }
 int grow(range* r, int num){
     if (r->left==NULL){
