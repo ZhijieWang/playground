@@ -1,10 +1,10 @@
 PROJECT := GeekforGeek
-CC=gcc
+CC=g++
 CFLAGS=-I.
 SRC_EXT = c
 
-make: main.c
-	@$(CC) -o main main.c
+make: main.cpp
+	@$(CC) -o main main.cpp
 run : main
 	@echo  "Program Output Below\n"
 	@./main; 
