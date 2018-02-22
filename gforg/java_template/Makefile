@@ -7,7 +7,7 @@ make: main.java
 	@$(CC) main.java
 run : main.class 
 	@echo  "Program Output Below\n"
-	@tee input.txt  | java main; 
+	@cat input.txt  | java main > output.txt; 
 	@echo "\nEnd of Program Output\n" 
 	@echo "------------------------------"
 	@echo "Comparing Output to Answer"
