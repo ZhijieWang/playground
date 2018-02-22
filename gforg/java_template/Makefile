@@ -1,13 +1,24 @@
 PROJECT := GeekforGeek
-CC=javac
-CFLAGS=-I.
-SRC_EXT = c
 
-make: main.java
-	@$(CC) main.java
+JFLAGS = -g
+JC = javac
+.SUFFIXES: .java .class
+.java.class:
+	$(JC) $(JFLAGS) $*.java
+
+CLASSES = \
+        main.java 
+
+default: classes
+
+classes: $(CLASSES:.java=.class)
+
+clean:
+	$(RM) *.class
 run : main.class 
 	@echo  "Program Output Below\n"
 	@cat input.txt  | java main > output.txt; 
+	@cat output.txt;
 	@echo "\nEnd of Program Output\n" 
 	@echo "------------------------------"
 	@echo "Comparing Output to Answer"
