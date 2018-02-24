@@ -1,7 +1,6 @@
 //Rahul and Ankit are the only two waiters in Royal Restaurant. Today, the restaurant received N orders. The amount of tips may differ when handled by different waiters, if Rahul takes the ith order, he would be tipped Ai rupees and if Ankit takes this order, the tip would be Bi rupees.
 //In order to maximize the total tip value they decided to distribute the order among themselves. One order will be handled by one person only. Also, due to time constraints Rahul cannot take more than X orders and Ankit cannot take more than Y orders. It is guaranteed that X + Y is greater than or equal to N, which means that all the orders can be handled by either Rahul or Ankit. Find out the maximum possible amount of total tip money after processing all the orders.
 //
-//
 //Input:
 //
 //    The first line contains one integer, number of test cases.
@@ -9,18 +8,13 @@
 //    The third line contains N integers. The ith integer represents Ai.
 //    The fourth line contains N integers. The ith integer represents Bi.
 //
-// 
-//
 //Output:
 //Print a single integer representing the maximum tip money they would receive.
-// 
 //
 //Constraints:
 //1 <= N <= 105
 //1 <= X, Y <= N; X + Y >= N
 //1 <= Ai, Bi <= 104
-//
-// 
 //
 //Example:
 //
@@ -41,14 +35,25 @@ import java.util.*;
 import java.io.IOException;
 import java.lang.*;
 import java.io.*;
+import java.util.stream.*;
 import java.io.InputStreamReader;
 class main
- {
-	public static void main (String[] args)
-	 {
+{
+    public static void main (String[] args)
+    {
         Scanner scanner = new Scanner(System.in);
         int numCases = scanner.nextInt();
-        System.out.println("What");
-        System.out.println(numCases);
-     }
+        for (; numCases>0; numCases--){
+            int numElements = scanner.nextInt();
+            int X = scanner.nextInt();
+            int Y = scanner.nextInt();
+            scanner.nextLine();
+            System.out.println(X);
+            int[] A = Stream.of(scanner.nextLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+            int[] B = Stream.of(scanner.nextLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+            System.out.println(A);
+            System.out.println(B);
+        }
+        scanner.close();
+    }
 }
