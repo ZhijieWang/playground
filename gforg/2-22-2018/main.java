@@ -51,9 +51,16 @@ class main
             System.out.println(X);
             int[] A = Stream.of(scanner.nextLine().split(" ")).mapToInt(Integer::parseInt).toArray();
             int[] B = Stream.of(scanner.nextLine().split(" ")).mapToInt(Integer::parseInt).toArray();
-            System.out.println(A);
-            System.out.println(B);
+            
         }
         scanner.close();
+    }
+    // optimal sub problem representation
+    // A take
+    // A does not take
+    // B take
+    // B does not take
+    public static void tipCalculatpr(int[] A, int [] B, int X, int Y){
+
     }
 }
