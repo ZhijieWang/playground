@@ -37,6 +37,7 @@ import java.lang.*;
 import java.io.*;
 import java.util.stream.*;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 class main
 {
     public static void main (String[] args)
@@ -47,20 +48,35 @@ class main
             int numElements = scanner.nextInt();
             int X = scanner.nextInt();
             int Y = scanner.nextInt();
+            int maxTip = 0;
             scanner.nextLine();
-            System.out.println(X);
-            int[] A = Stream.of(scanner.nextLine().split(" ")).mapToInt(Integer::parseInt).toArray();
-            int[] B = Stream.of(scanner.nextLine().split(" ")).mapToInt(Integer::parseInt).toArray();
-            
+            int[] A = Arrays.copyOfRange(Stream.of(scanner.nextLine().split(" ")).mapToInt(Integer::parseInt).toArray(), 0, numElements);
+            int[] B = Arrays.copyOfRange(Stream.of(scanner.nextLine().split(" ")).mapToInt(Integer::parseInt).toArray(), 0, numElements);
+          // A take all the jobs
+          // if A < N then B have to take at least N-A jobs, 
+          // but no more than B that B is better than A or some jobs that B is not as good as A, but with least lost
+          // Given A + B >= N
+          // this will make all jobs
+            int[] diff = IntStream.range(0, A.length).map(i-> A[i]-B[i]).sorted().toArray();
+            maxTip = IntStream.of(A).sum();
+            // adding required jobs to make sure all N jobs can be handled
+            int start = 0;
+            for (; start< (numElements-X); start++){
+                maxTip -= diff[start];
+            }
+            //System.out.println(maxTip);
+            // now add the optional jobs that B can help optimize
+            if (diff[numElements-start]<0){
+            // B can help do better than A
+                for (; start < Y; start++){
+                    if (diff[start] >0){
+                        maxTip-=diff[start];
+                    }else{
+                        break;
+                    }
+                }
+           }
         }
         scanner.close();
-    }
-    // optimal sub problem representation
-    // A take
-    // A does not take
-    // B take
-    // B does not take
-    public static void tipCalculatpr(int[] A, int [] B, int X, int Y){
-
     }
 }

@@ -25,8 +25,8 @@ run : main.class
 	@cmp -s output.txt answer.txt; \
 	RETVAL=$$?; \
 	if [ $$RETVAL -eq 0 ]; then \
-    	printf  "PASS"; \
+    	printf  "PASS\n"; \
 	else \
-    	printf "FAILED"; \
+    	printf "FAILED\n"; \
 	fi
 
