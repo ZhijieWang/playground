@@ -7,7 +7,7 @@ JC = javac
 	$(JC) $(JFLAGS) $*.java
 
 CLASSES = \
-        main.java 
+        run.java 
 
 default: classes
 
@@ -15,7 +15,7 @@ classes: $(CLASSES:.java=.class)
 
 clean:
 	$(RM) *.class
-run : main.class 
+run : run.class 
 	@echo  "Program Output Below\n"
 	@cat input.txt  | java main > output.txt; 
 	@cat output.txt;
@@ -25,8 +25,8 @@ run : main.class
 	@cmp -s output.txt answer.txt; \
 	RETVAL=$$?; \
 	if [ $$RETVAL -eq 0 ]; then \
-    	printf  "PASS"; \
+    	printf  "PASS\n"; \
 	else \
-    	printf "FAILED"; \
+    	printf "FAILED\n"; \
 	fi
 

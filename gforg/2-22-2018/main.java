@@ -50,32 +50,48 @@ class main
             int Y = scanner.nextInt();
             int maxTip = 0;
             scanner.nextLine();
-            int[] A = Arrays.copyOfRange(Stream.of(scanner.nextLine().split(" ")).mapToInt(Integer::parseInt).toArray(), 0, numElements);
-            int[] B = Arrays.copyOfRange(Stream.of(scanner.nextLine().split(" ")).mapToInt(Integer::parseInt).toArray(), 0, numElements);
-          // A take all the jobs
-          // if A < N then B have to take at least N-A jobs, 
-          // but no more than B that B is better than A or some jobs that B is not as good as A, but with least lost
-          // Given A + B >= N
-          // this will make all jobs
-            int[] diff = IntStream.range(0, A.length).map(i-> A[i]-B[i]).sorted().toArray();
-            maxTip = IntStream.of(A).sum();
+            int[] A = new int[numElements];
+            int[] B = new int[numElements];
+            int[] diff = new int[numElements];
+            for (int k = 0; k < numElements; k++){
+                A[k] = scanner.nextInt();
+                maxTip += A[k];
+            }
+            scanner.nextLine();
+            for (int k = 0; k < numElements; k++){
+                B[k] = scanner.nextInt();
+                // calculating A B performance difference
+                diff[k]=A[k]-B[k];
+            }
+            if (scanner.hasNextLine()){
+                scanner.nextLine();
+            }
+            Arrays.sort(diff);
+            // A take all the jobs
+            // if A < N then B have to take at least N-A jobs, 
+            // but no more than B that B is better than A or some jobs that B is not as good as A, but with least lost
+            // Given A + B >= N
+            // this will make all jobs
             // adding required jobs to make sure all N jobs can be handled
             int start = 0;
+            //System.out.println(Arrays.toString(diff));
             for (; start< (numElements-X); start++){
+            //    System.out.println(diff[start]);
                 maxTip -= diff[start];
             }
-            //System.out.println(maxTip);
             // now add the optional jobs that B can help optimize
-            if (diff[numElements-start]<0){
+            if (diff[start]<0){
             // B can help do better than A
                 for (; start < Y; start++){
-                    if (diff[start] >0){
+                    if (diff[start] <0){
+            //            System.out.println(diff[start]);
                         maxTip-=diff[start];
                     }else{
                         break;
                     }
                 }
            }
+           System.out.println(maxTip);
         }
         scanner.close();
     }
