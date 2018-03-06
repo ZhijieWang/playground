@@ -29,18 +29,21 @@ func main() {
 	//fmt.Println(result)
 	//fmt.Println("End of program \n")
 	fmt.Println(setBit(3))
+	fmt.Println(setBit(6))
+	fmt.Println(setBit(7))
 }
 func setBit(a int) int {
-	switch a {
-	case 0:
-		return 0
-	case 1:
-		return 1
-	case 2:
-		return 2
-	default:
-		return setBit(a-1) + countBit(a)
+	start := 1
+	counter := 0
+	for ; start <= a; start++ {
+		if start == 1 {
+			counter = counter + 1
+		} else {
+			counter += countBit(start)
+		}
+		//fmt.Printf("start is %i, counter is %i \n", start, counter)
 	}
+	return counter
 }
 func countBit(a int) int {
 	counter := 0
