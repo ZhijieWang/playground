@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+	"log"
+	"time"
 )
 
 //Given a positive integer n, count the total number of set bits in binary representation of all numbers from 1 to n.
@@ -19,29 +21,19 @@ import (
 //
 //Input: n = 8
 //Output: 13
+func timeTrack(start time.Time, name string) {
+	elapsed := time.Since(start)
+	log.Printf("%s took %s", name, elapsed)
+}
 func main() {
-	//fmt.Println("Please enter some value\n")
-	//reader := bufio.NewReader(os.Stdin)
-	//result, err := reader.ReadString('\n')
-	//if err != nil {
-	//	fmt.Println("Something wrong %s", err)
-	//}
-	//fmt.Println(result)
-	//fmt.Println("End of program \n")
-	//	fmt.Println(setBit(3) == 4)
-	//fmt.Println(setBit(6) == 9)
-	//fmt.Println(setBit(7) == 12)
-	//fmt.Println(setBit(9) == 15)
-	fmt.Println(setBit(9) == setBit(8)+setBit(1)+1)
-	//	fmt.Println(setBitDP(1))
-	//	fmt.Println(setBitDP(3))
-	//	fmt.Println(setBitDP(4))
-	fmt.Println(setBitFast(6))
+	fmt.Println(setBitWrapper(10) == 17)
+	fmt.Println(setBitFastWrapper(10) == 17)
 }
 
-//func seconfLeftMostBit(a int, offset int) {
-//	a = a - (1 << offset)
-//}
+func setBitFastWrapper(a int) int {
+	defer timeTrack(time.Now(), "setBitFast")
+	return setBitFast(a)
+}
 func setBitFast(a int) int {
 	switch a {
 	case 0:
@@ -53,10 +45,10 @@ func setBitFast(a int) int {
 	default:
 		m := uint(leftMostBit(a))
 		if a-(1<<m) == 0 {
-			fmt.Println("stack cakk %i, %i\n", a-1, 1)
+			//			fmt.Println("stack cakk %i, %i\n", a-1, 1)
 			return setBitFast(a-1) + 1
 		}
-		fmt.Printf("stack call %i, %i\n", 1<<m, a-(1<<m))
+		//		fmt.Printf("stack call %i, %i\n", 1<<m, a-(1<<m))
 		return setBitFast(1<<m) + setBit(a-(1<<m)) + a - (1 << m)
 	}
 	// get result for num bits
@@ -68,6 +60,10 @@ func leftMostBit(a int) int {
 		highestBit++
 	}
 	return highestBit
+}
+func setBitWrapper(a int) int {
+	defer timeTrack(time.Now(), "setBit")
+	return setBit(a)
 }
 func setBit(a int) int {
 	start := 1
