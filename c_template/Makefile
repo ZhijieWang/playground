@@ -11,6 +11,7 @@ run : main
 	@echo "\nEnd of Program Output\n" 
 	@echo "------------------------------"
 	@echo "Comparing Output to Answer"
+	@sed -i 's/[ \t]*$$//' output.txt;
 	@cmp -s output.txt answer.txt; \
 	RETVAL=$$?; \
 	if [ $$RETVAL -eq 0 ]; then \
