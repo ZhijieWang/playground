@@ -1,0 +1,11 @@
+This is the template for GeekForGeek coding practice playground.
+
+3 files
+
+main.c -- single source file with solution implementation. it should read from input.txt and write to output.txt
+
+input.txt -- input file with test cases
+
+answer.txt -- output file for the test cases in the inputfile
+
+Makefile -- the makefile for compiling the program and execute the test cases, verifying the output against the answer file
