@@ -44,13 +44,19 @@ package main
 
 import "fmt"
 
-func solveMeFirst(a uint32, b uint32) uint32 {
-	return a + b
-}
-
 func main() {
-	var a, b, res uint32
-	fmt.Scanf("%v\n%v", &a, &b)
-	res = solveMeFirst(a, b)
-	fmt.Println(res)
+	var ai [3]uint32
+	var bi [3]uint32
+	fmt.Scanf("%v %v %v\n%v %v %v", &ai[0], &ai[1], &ai[2], &bi[0], &bi[1], &bi[2])
+	var a, b int
+	for i := 0; i < 3; i++ {
+		switch {
+		case ai[i] > bi[i]:
+			a++
+		case ai[i] < bi[i]:
+			b++
+		case ai[i] == bi[i]:
+		}
+	}
+	fmt.Println(a, b)
 }

@@ -1,6 +1,6 @@
 build:	
 	go build
-run: build
+run: 
 	@echo  "Program Output Below\n"
 	@cat input.txt  | go run main.go > output.txt; 
 	@cat output.txt;
